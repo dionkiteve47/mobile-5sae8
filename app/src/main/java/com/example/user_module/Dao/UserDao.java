@@ -3,6 +3,7 @@ package com.example.user_module.Dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.user_module.entity.User;
 
@@ -10,6 +11,9 @@ import com.example.user_module.entity.User;
 public interface UserDao {
     @Insert
     void insert(User user);
+
+    @Update
+    void update(User user);
 
     @Query("SELECT COUNT(*) FROM user_table WHERE email = :email")
     int checkUserExists(String email);

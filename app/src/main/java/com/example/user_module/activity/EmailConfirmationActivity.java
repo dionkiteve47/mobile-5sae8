@@ -37,7 +37,7 @@ public class EmailConfirmationActivity extends AppCompatActivity {
         String enteredCode = confirmationCodeEditText.getText().toString().trim();
 
         if (enteredCode.equals(expectedCode)) {
-            AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "user_database").build();
+            AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "MobileApp").build();
 
             new Thread(() -> {
                 UserDao userDao = db.userDao();

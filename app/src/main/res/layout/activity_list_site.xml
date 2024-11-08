@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/customBackgroundColor">
+
+    <Button
+        android:id="@+id/buttonAddSite"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Add Site"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:paddingHorizontal="20dp"
+        android:elevation="4dp"
+        android:layout_marginTop="8dp"
+
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSites"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?attr/colorSurface"
+        android:elevation="4dp"
+        android:clipToPadding="false"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>

@@ -2,12 +2,7 @@ package com.example.user_module.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,12 +10,23 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.user_module.AppDatabase;
 import com.example.user_module.Dao.UserDao;
 import com.example.user_module.R;
 import com.example.user_module.entity.User;
+import com.example.user_module.util.SessionManager;
+import com.google.android.gms.safetynet.SafetyNet;
+import com.google.android.gms.safetynet.SafetyNetApi;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
@@ -36,51 +42,61 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         signUpTextView = findViewById(R.id.signUpTextView);
-        forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView); // Initialize the Forgot Password TextView
+        forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
 
-        loginButton.setOnClickListener(view -> loginUser());
-
-        // Set up the "Sign Up" clickable text
-        setSignUpClickableText();
-
-        // Set up the "Forgot Password" clickable text
-        forgotPasswordTextView.setOnClickListener(view -> {
-            // Navigate to ForgotPasswordActivity
-            Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-            startActivity(intent);
-        });
+        loginButton.setOnClickListener(view -> verifyReCaptcha());
     }
 
-    private void setSignUpClickableText() {
-        String text = "Don’t have an account? Sign Up";
-        SpannableString spannableString = new SpannableString(text);
+    private void verifyReCaptcha() {
+        SafetyNet.getClient(this).verifyWithRecaptcha("6LckL3gqAAAAAI-bbARSpuHCZY3Sq1hsiPcUCLW2")
+                .addOnSuccessListener(this, response -> {
+                    if (response.getTokenResult() != null && !response.getTokenResult().isEmpty()) {
+                        // reCAPTCHA completed successfully, now validate the response token
+                        validateCaptchaToken(response.getTokenResult());
+                    }
+                })
+                .addOnFailureListener(this, e -> {
+                    // Handle reCAPTCHA error
+                    Toast.makeText(this, "reCAPTCHA failed. Please try again.", Toast.LENGTH_SHORT).show();
+                });
+    }
 
-        // Define a ClickableSpan for the "Sign Up" part
-        ClickableSpan signUpClickableSpan = new ClickableSpan() {
+    private void validateCaptchaToken(String token) {
+        // Use Volley to send the token to your server for verification
+        String url = "https://www.google.com/recaptcha/api/siteverify";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        boolean success = jsonObject.getBoolean("success");
+
+                        if (success) {
+                            // CAPTCHA verified, proceed with login
+                            loginUser();
+                        } else {
+                            Toast.makeText(this, "CAPTCHA verification failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Toast.makeText(this, "Verification error.", Toast.LENGTH_SHORT).show()) {
             @Override
-            public void onClick(View widget) {
-                // Navigate to RegisterActivity
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("secret", "6LckL3gqAAAAAH5XOlL3MK6eiejGTkwMn04QfOlF");
+                params.put("response", token);
+                return params;
             }
         };
 
-        // Apply the clickable span to the "Sign Up" portion of the text
-        int signUpStartIndex = text.indexOf("Sign Up");
-        int signUpEndIndex = signUpStartIndex + "Sign Up".length();
-        spannableString.setSpan(signUpClickableSpan, signUpStartIndex, signUpEndIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        // Set the spannable string on the TextView and make links clickable
-        signUpTextView.setText(spannableString);
-        signUpTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        signUpTextView.setHighlightColor(getResources().getColor(android.R.color.transparent)); // Remove link highlight color
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
     private void loginUser() {
         final String email = emailEditText.getText().toString().trim();
         final String password = passwordEditText.getText().toString().trim();
 
-        // Validate email field
         if (email.isEmpty()) {
             emailEditText.setError("Email is required");
             emailEditText.requestFocus();
@@ -93,32 +109,28 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Validate password field
         if (password.isEmpty()) {
             passwordEditText.setError("Password is required");
             passwordEditText.requestFocus();
             return;
         }
 
-        // Initialize the Room database
         AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "user_database").build();
 
-        // Authenticate the user
         new Thread(() -> {
             UserDao userDao = db.userDao();
-            User user = userDao.getUserByEmail(email); // Query to find user by email
+            User user = userDao.getUserByEmail(email);
 
             if (user != null && BCrypt.checkpw(password, user.password)) {
-                // Password matches
                 runOnUiThread(() -> {
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    // Navigate to the next screen, e.g., HomeActivity
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class); // Replace with the target activity
+                    SessionManager sessionManager = new SessionManager(getApplicationContext());
+                    sessionManager.createLoginSession(String.valueOf(user.id));
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent);
                     finish();
                 });
             } else {
-                // Email not found or password does not match
                 runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show());
             }
         }).start();

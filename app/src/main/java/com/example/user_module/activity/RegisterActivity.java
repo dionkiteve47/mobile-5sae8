@@ -180,20 +180,25 @@ public class RegisterActivity extends AppCompatActivity {
                 message.setText(body);
 
                 Transport.send(message);
+
+                // Show toast on success (UI thread)
+                new Handler(Looper.getMainLooper()).post(() ->
+                        Toast.makeText(RegisterActivity.this, "Email sent successfully to: " + recipient, Toast.LENGTH_SHORT).show()
+                );
+
                 Log.i("RegisterActivity", "Email sent successfully to: " + recipient);
+
             } catch (MessagingException e) {
                 Log.e("RegisterActivity", "Failed to send email to: " + recipient, e);
+                // Show toast on failure (UI thread)
+                new Handler(Looper.getMainLooper()).post(() ->
+                        Toast.makeText(RegisterActivity.this, "Failed to send email. Check logs for details.", Toast.LENGTH_SHORT).show()
+                );
             } finally {
                 executor.shutdown();
             }
         });
     }
-
-
-
-
-
-
 
 
 }
