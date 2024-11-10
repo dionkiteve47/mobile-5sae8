@@ -3,8 +3,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background_gradient_auth">
 
+    <!-- Email EditText -->
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
@@ -13,8 +15,12 @@
         android:minHeight="48dp"
         android:minWidth="350dp"
         android:inputType="textEmailAddress"
+        android:background="@drawable/edittext_background_auth"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
         android:autofillHints="emailAddress" />
 
+    <!-- Password EditText -->
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"
@@ -23,14 +29,23 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:minWidth="350dp"
+        android:background="@drawable/edittext_background_auth"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
         android:autofillHints="password" />
 
+    <!-- Register Button -->
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
-        android:minWidth="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/register" />
+        android:backgroundTint="@color/buttonColor"
+        android:minWidth="250dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/register"
+        android:textStyle="bold"
+        android:textColor="@android:color/white" />
 
     <!-- Sign In TextView -->
     <TextView
@@ -39,7 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Already have an account? Sign In"
-        android:textColor="@android:color/black"
+        android:textColor="@color/primaryColorLight"
         android:textStyle="bold" />
-
 </LinearLayout>

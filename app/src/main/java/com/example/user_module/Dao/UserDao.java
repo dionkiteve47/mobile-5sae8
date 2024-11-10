@@ -31,5 +31,8 @@ public interface UserDao {
     @Query("UPDATE user_table SET password = :newPassword WHERE email = :email")
     void updatePassword(String email, String newPassword);
 
+    @Query("SELECT * FROM user_table WHERE resetToken = :resetToken LIMIT 1")
+    User getUserByResetToken(String resetToken); // Retrieve user by reset token
+
 
 }

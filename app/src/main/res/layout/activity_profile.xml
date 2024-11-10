@@ -1,74 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center_vertical"
+    android:background="@drawable/background_gradient_auth">
 
-    <!-- Name -->
-    <TextView
-        android:id="@+id/profileName"
-        android:layout_width="wrap_content"
+    <!-- Profile Name Display -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name: John Doe"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="horizontal"
+        android:background="@drawable/container_background"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical">
 
-    <EditText
-        android:id="@+id/editProfileName"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_person" />
+
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Name: [Placeholder]"
+            android:textColor="@android:color/black"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editProfileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Enter Name"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone" /> <!-- Hidden by default -->
+    </LinearLayout>
+
+    <!-- Profile Surname Display -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Name"
-        android:visibility="gone"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="horizontal"
+        android:background="@drawable/container_background"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical">
 
-    <!-- Surname -->
-    <TextView
-        android:id="@+id/profileSurname"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_person_24" />
+
+        <TextView
+            android:id="@+id/profileSurname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Surname: [Placeholder]"
+            android:textColor="@android:color/black"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editProfileSurname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Enter Surname"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Profile Phone Display -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Surname: Doe"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="horizontal"
+        android:background="@drawable/container_background"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical">
 
-    <EditText
-        android:id="@+id/editProfileSurname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Enter Surname"
-        android:visibility="gone"
-        android:layout_marginBottom="8dp"/>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_local_phone_24" />
 
-    <!-- Phone -->
-    <TextView
-        android:id="@+id/profilePhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phone: 123-456-7890"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            android:id="@+id/profilePhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Phone: [Placeholder]"
+            android:textColor="@android:color/black"
+            android:visibility="visible" />
 
-    <EditText
-        android:id="@+id/editProfilePhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Enter Phone"
-        android:visibility="gone"
-        android:layout_marginBottom="16dp"/>
+        <EditText
+            android:id="@+id/editProfilePhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Enter Phone"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
+    </LinearLayout>
 
-    <!-- Buttons -->
+    <!-- Centered Edit Button -->
     <Button
         android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_background"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:text="Edit Profile"/>
 
+    <!-- Centered Save Button -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:visibility="gone"/>
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_background"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="Save"/>
 </LinearLayout>

@@ -1,60 +1,75 @@
 package com.example.user_module.activity;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.example.user_module.R;
-
-// ResetPasswordActivity.java
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+
 import com.example.user_module.AppDatabase;
 import com.example.user_module.Dao.UserDao;
+import com.example.user_module.R;
+import com.example.user_module.entity.User;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.concurrent.Executors;
+
 public class ResetPasswordActivity extends AppCompatActivity {
-    private EditText resetCodeEditText, newPasswordEditText;
-    private Button confirmResetButton;
-    private String expectedCode, email;
+    private EditText newPasswordEditText;
+    private Button resetPasswordButton;
+    private String resetToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-        resetCodeEditText = findViewById(R.id.resetCodeEditText);
         newPasswordEditText = findViewById(R.id.newPasswordEditText);
-        confirmResetButton = findViewById(R.id.confirmResetButton);
 
-        email = getIntent().getStringExtra("email");
-        expectedCode = getIntent().getStringExtra("resetCode");
+        resetPasswordButton = findViewById(R.id.confirmResetButton);
 
-        confirmResetButton.setOnClickListener(v -> {
-            String enteredCode = resetCodeEditText.getText().toString().trim();
-            String newPassword = newPasswordEditText.getText().toString().trim();
+        // Retrieve reset token from intent
+        resetToken = getIntent().getStringExtra("resetToken");
 
-            if (enteredCode.equals(expectedCode)) {
-                AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "user_database").build();
-                new Thread(() -> {
-                    UserDao userDao = db.userDao();
-                    userDao.updatePassword(email, BCrypt.hashpw(newPassword, BCrypt.gensalt()));
-                    runOnUiThread(() -> {
-                        Toast.makeText(ResetPasswordActivity.this, "Password reset successful", Toast.LENGTH_SHORT).show();
-                        finish();
-                    });
-                }).start();
+        resetPasswordButton.setOnClickListener(v -> resetPassword());
+    }
+
+    private void resetPassword() {
+        String newPassword = newPasswordEditText.getText().toString().trim();
+
+        if (newPassword.isEmpty() ) {
+            Toast.makeText(this, "Both fields are required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "user_database").build();
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            UserDao userDao = db.userDao();
+            User user = userDao.getUserByResetToken(resetToken);
+
+            if (user != null) {
+                String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+                user.setPassword(hashedPassword);
+                user.setResetToken(null);  // Clear reset token
+                userDao.update(user);
+
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Password reset successfully", Toast.LENGTH_SHORT).show();
+
+                    // Redirect to LoginActivity
+                    Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                });
             } else {
-                Toast.makeText(this, "Invalid reset code", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(this, "Invalid reset token", Toast.LENGTH_SHORT).show());
             }
         });
     }
