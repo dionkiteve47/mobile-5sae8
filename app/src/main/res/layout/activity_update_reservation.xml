@@ -99,6 +99,7 @@
 
         <!-- Room Details -->
         <TextView
+            android:id="@+id/room_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1 x Chambre Double (Amber el fell) Logement Petit Déjeuner Disponible"
@@ -191,6 +192,7 @@
 
         <!-- Payment Info -->
         <TextView
+            android:id="@+id/payment_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Je paie le montant total en ligne [222.990 TND]"

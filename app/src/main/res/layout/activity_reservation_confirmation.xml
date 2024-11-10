@@ -199,7 +199,7 @@
             android:id="@+id/payment_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Je paie le montant total en ligne [222.990 TND]"
+            android:text="Je paie le montant total à l'agence [222.990 TND]"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />

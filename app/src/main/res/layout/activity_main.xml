@@ -35,6 +35,7 @@
 
         <!-- Accommodation icon -->
         <LinearLayout
+            android:id="@+id/hotel_section"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,18 +45,19 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_accommodation" />
+                android:src="@drawable/baseline_hotel_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hébergements"
+                android:text="Hotel"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Flights icon -->
         <LinearLayout
+            android:id="@+id/restaurant_section"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,12 +67,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_flights" />
+                android:src="@drawable/baseline_restaurant_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vols"
+                android:text="Restaurant"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -131,37 +133,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/navigation_bar">
 
-        <TextView
+        <EditText
+            android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_box"
-            android:drawableStart="@drawable/ic_location"
+            android:drawableStart="@drawable/baseline_location_on_24"
             android:drawablePadding="8dp"
             android:padding="8dp"
-            android:text="Hammamet"
-            android:textColor="@color/black" />
+            android:hint="Search location"
+            android:textColor="@color/black"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_search_box"
-            android:drawableStart="@drawable/ic_calendar"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:text="Mer. 12 juin - Mar. 18 juin"
-            android:textColor="@color/black" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_search_box"
-            android:drawableStart="@drawable/ic_person"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:text="1 hébergement - 2 adultes"
-            android:textColor="@color/black" />
+
 
         <Button
             android:layout_width="match_parent"
@@ -170,6 +154,13 @@
             android:backgroundTint="@color/blue"
             android:text="Rechercher"
             android:textColor="@android:color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -185,10 +176,76 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Best offers section -->
 
-    <!-- Image sections -->
 
+
+
+
+
+
+    <!-- restaurant -->
+
+    <LinearLayout
+        android:id="@+id/restaurant_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigation_bar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_search_box"
+            android:drawableStart="@drawable/baseline_location_on_24"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="Hammamet"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_search_box"
+            android:drawableStart="@drawable/baseline_calendar_month_24"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="Mer. 12 juin - Mar. 18 juin"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_search_box"
+            android:drawableStart="@drawable/baseline_person_24"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
+            android:text="1 hébergement - 2 adultes"
+            android:textColor="@color/black" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/blue"
+            android:text="Rechercher"
+            android:textColor="@android:color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        </ScrollView>
+
+
+    </LinearLayout>
 
 
 
@@ -204,27 +261,6 @@
 
 
     <!-- Add the RecyclerView here -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
