@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.user_module.R;
 import com.example.user_module.activity.AddEditSiteActivity;
 import com.example.user_module.activity.SiteListActivity;
@@ -45,6 +47,14 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
         holder.textViewName.setText(site.getName());
         holder.textViewLocation.setText(site.getLocation());
 
+        // Load the image using Glide if imageUri is available
+        if (site.getImageUri() != null && !site.getImageUri().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(site.getImageUri())
+                    .placeholder(R.drawable.ic_add) // Optional placeholder
+                    .into(holder.imageViewSite);  // Load image into ImageView
+        }
+
         // Set up the menu button with options
         holder.buttonMenu.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(context, holder.buttonMenu);
@@ -66,6 +76,7 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
             popupMenu.show();
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -100,12 +111,15 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.SiteViewHolder
     public static class SiteViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName, textViewLocation;
         ImageButton buttonMenu;
+        ImageView imageViewSite; // New ImageView for site image
 
         public SiteViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewLocation = itemView.findViewById(R.id.textViewLocation);
             buttonMenu = itemView.findViewById(R.id.buttonMenu);
+            imageViewSite = itemView.findViewById(R.id.image_view_site); // Initialize ImageView
         }
     }
+
 }

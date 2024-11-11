@@ -13,7 +13,7 @@ public class Site {
     private String location;
     private String description;
     private float rating; // Store rating as a float
-
+    private String imageUri;
     // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -26,6 +26,8 @@ public class Site {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+    public String getImageUri() { return imageUri; }
+    public void setImageUri(String imageUri) { this.imageUri = imageUri; }
 
     public float getRating() { return rating; }
     public void setRating(float rating) { this.rating = rating; }

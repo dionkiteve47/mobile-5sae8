@@ -5,6 +5,15 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:background="@color/customBackgroundColor">
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_back"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Back"
+        android:clickable="true"
+        android:focusable="true" />
 
     <Button
         android:id="@+id/buttonAddSite"

@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_back"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Back"
+        android:clickable="true"
+        android:focusable="true" />
     <!-- Title Input Field -->
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextTitle"
@@ -25,6 +33,27 @@
         android:inputType="textMultiLine"
         android:minHeight="48dp" />
 
+    <!-- Rounded Button to select an image from the gallery -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSelectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:text="Select Image"
+        android:textColor="?android:attr/textColorPrimaryInverse" />
+
+    <!-- ImageView to preview the selected image with rounded corners -->
+    <ImageView
+        android:id="@+id/imageViewPreview"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Restaurant Image Preview"
+        android:background="?attr/colorSurfaceVariant"
+        android:clipToOutline="true" />
     <!-- Save Button -->
     <Button
         android:id="@+id/buttonSaveForum"

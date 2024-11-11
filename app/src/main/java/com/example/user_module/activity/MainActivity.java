@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
             startActivity(intent); // Start the AddEditRestaurantActivity
         });
 
+        LinearLayout site = findViewById(R.id.site); // Find the add icon
+        site.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SiteListActivity.class); // Create the intent
+            startActivity(intent); // Start the AddEditRestaurantActivity
+        });
+
+
         // Initialize Search Box for restaurants
         EditText searchBoxRestaurant = findViewById(R.id.search_box_Restaurant);
 
