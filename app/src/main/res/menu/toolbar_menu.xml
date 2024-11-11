@@ -1,0 +1,12 @@
+<!-- res/menu/toolbar_menu.xml -->
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_reservation_list"
+        android:title="Reservation List"
+        android:icon="@android:drawable/ic_menu_view"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource" />
+</menu>

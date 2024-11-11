@@ -100,26 +100,29 @@
         </LinearLayout>
 
         <!-- Taxi icon -->
+        <!-- Excursion Section -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/excursion_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_activity" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/baseline_activity" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Activities"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
+            android:text="Excursion"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
     </LinearLayout>
+
+</LinearLayout>
 
     <!-- Search section -->
     <LinearLayout
@@ -141,9 +144,10 @@
             android:background="@drawable/bg_search_box"
             android:drawableStart="@drawable/baseline_location_on_24"
             android:drawablePadding="8dp"
-            android:padding="8dp"
             android:hint="Search location"
-            android:textColor="@color/black"/>
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:textColor="@color/black" />
 
 
 
@@ -205,7 +209,8 @@
                 android:drawableStart="@drawable/baseline_location_on_24"
                 android:drawablePadding="8dp"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <!-- Add Icon on the top right -->
             <ImageView

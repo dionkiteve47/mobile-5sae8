@@ -121,6 +121,12 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
             searchSection.setVisibility(View.GONE);
         });
 
+        LinearLayout excursionSection = findViewById(R.id.excursion_section);
+        excursionSection.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ExcursionActivity.class);
+            startActivity(intent);
+        });
+
         // Initialize RecyclerView for restaurants
         RecyclerView recyclerViewRestaurant = findViewById(R.id.recyclerViewRestaurant);
         recyclerViewRestaurant.setLayoutManager(new GridLayoutManager(this, 2));

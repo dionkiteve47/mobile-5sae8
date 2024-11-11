@@ -48,7 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".activity.ViewRestaurantActivity"
             android:exported="false" />
@@ -84,13 +84,33 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".activity.ExcursionActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".activity.ExcursionDetailActivity"
+            android:exported="true">
+        </activity>
+
+        <!-- Declaration for ReservationExActivity -->
+
+
+        <activity android:name=".activity.ViewReservationsActivity"
+            android:exported="true">
+        </activity>
     </application>
+
+
 
 </manifest>

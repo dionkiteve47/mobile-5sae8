@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="120dp"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Sample comments or other content -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Some previous comments or content..."
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Add more comment sections or content here -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Another comment..."
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Continue adding content or comments -->
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Comment section that stays stuck at the bottom -->
+    <LinearLayout
+        android:id="@+id/comment_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp">
+
+        <!-- Rating Bar for rating (clickable) -->
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:layout_marginBottom="12dp" />
+
+        <!-- EditText for comment input -->
+        <EditText
+            android:id="@+id/edit_text_commentaire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Votre commentaire"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="20dp"
+            android:maxLength="500" />
+
+        <!-- Horizontal layout for buttons -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <!-- Submit Button with larger weight -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_submit_commentaire"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Ajouter un commentaire"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_marginEnd="12dp"
+                android:paddingHorizontal="32dp"
+                android:paddingVertical="12dp"
+                app:cornerRadius="16dp" />
+
+            <!-- "Réserver" Button with smaller weight -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_reserver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Réserver"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorPrimary"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                app:cornerRadius="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

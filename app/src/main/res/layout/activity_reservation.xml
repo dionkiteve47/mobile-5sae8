@@ -1,0 +1,185 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/white"
+    android:clipToPadding="false"
+    android:gravity="center">
+
+    <!-- Reservation details card with rounded corners and shadow -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:padding="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        android:backgroundTint="@color/light_gray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reservation Details"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_gray"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:contentDescription="Reservation Details Header"/>
+
+            <!-- Date Picker Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Date"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:labelFor="@id/text_date"
+                android:fontFamily="@font/roboto_regular"/>
+
+            <!-- Date Picker Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="12dp"
+                android:onClick="showDatePickerDialog"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="Select reservation date"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_calendar"
+                    app:tint="@color/backgroundColor" />
+
+                <TextView
+                    android:id="@+id/text_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Date"
+                    android:textSize="18sp"
+                    android:textColor="@color/dark_gray"
+                    android:textStyle="bold"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"/>
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_light"/>
+
+            <!-- Time Picker Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Time"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:labelFor="@id/text_time"
+                android:fontFamily="@font/roboto_regular"/>
+
+            <!-- Time Picker Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="12dp"
+                android:onClick="showTimePickerDialog"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="Select reservation time"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_time"
+                    app:tint="@color/backgroundColor" />
+
+                <TextView
+                    android:id="@+id/text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Time"
+                    android:textSize="18sp"
+                    android:textColor="@color/dark_gray"
+                    android:textStyle="bold"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"/>
+            </LinearLayout>
+
+            <!-- Number of Participants -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of Participants"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:labelFor="@id/num_participants"
+                android:fontFamily="@font/roboto_regular"/>
+
+            <EditText
+                android:id="@+id/num_participants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter number"
+                android:inputType="number"
+                android:padding="12dp"
+                android:background="@drawable/comment_card_background"
+                android:textColor="@color/dark_gray"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_regular"/>
+
+            <!-- Additional Notes -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Additional Notes"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:labelFor="@id/edit_notes"
+                android:fontFamily="@font/roboto_regular"/>
+
+            <EditText
+                android:id="@+id/edit_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add any notes here..."
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/comment_card_background"
+                android:textColor="@color/dark_gray"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Confirm Reservation Button (Replaced FloatingActionButton) -->
+    <Button
+        android:id="@+id/button_submit_reservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Reservation"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/backgroundColor"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:contentDescription="Confirm reservation button"/>
+</LinearLayout>

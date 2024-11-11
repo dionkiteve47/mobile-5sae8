@@ -38,5 +38,12 @@
     <color name="recyclerViewBackgroundColor">#F0F0F0</color>
     <color name="primaryColorLight">#BB86FC</color>
 
+    
+    <color name="lightGray">#868686</color>
+    <color name="textColor">#010134</color>
+    <color name="primary">#6200EE</color> <!-- Customize as per your theme -->
+    <color name="light_gray">#F5F5F5</color>
+    <color name="dark_gray">#444444</color>
+    <color name="gray_light">#DDDDDD</color>
 
 </resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <!-- RecyclerView for listing Excursions -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_excursions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:background="@color/white"
+        android:elevation="2dp" />
+
+    <!-- Floating Action Button (FAB) to navigate to Reservations -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fab_reservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@android:drawable/ic_menu_view"
+        android:backgroundTint="@color/colorAccent"
+        android:elevation="6dp"
+        android:layout_gravity="bottom|start" />
+
+</FrameLayout>
