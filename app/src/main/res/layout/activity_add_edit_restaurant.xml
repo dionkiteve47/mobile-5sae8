@@ -50,6 +50,25 @@
         android:minHeight="48dp"
         android:padding="10dp" />
 
+    <!-- Button to select an image from the gallery -->
+    <Button
+        android:id="@+id/buttonSelectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:text="Select Image" />
+
+    <!-- ImageView to preview the selected image -->
+    <ImageView
+        android:id="@+id/imageViewPreview"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Restaurant Image Preview" />
+
     <!-- Button for Saving Restaurant -->
     <Button
         android:id="@+id/button_save"

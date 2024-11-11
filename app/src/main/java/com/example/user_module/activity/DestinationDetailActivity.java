@@ -39,6 +39,14 @@ public class DestinationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_destination_detail);
 
 
+        ImageView addIcon = findViewById(R.id.add_icon); // Find the add icon
+        addIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddAccommodationActivity.class); // Create the intent
+            startActivity(intent); // Start the AddEditRestaurantActivity
+        });
+
+
+
         // Initialize UI elements
         destinationImage = findViewById(R.id.destination_image);
         destinationName = findViewById(R.id.destination_name);
@@ -137,10 +145,11 @@ public class DestinationDetailActivity extends AppCompatActivity {
         // List of sample accommodations to add
         List<Accommodation> accommodations = new ArrayList<>();
 
-        accommodations.add(new Accommodation("Hôtel Amber El Fell", "Hammamet", "Hotel", 10, 210.60, true, "Luxury Hotel", R.drawable.sample_image1));
-        accommodations.add(new Accommodation("Guest House Hammamet", "Hammamet", "Guest House", 50, 80.0, true, "Cozy Place", R.drawable.sample_image2));
+        accommodations.add(new Accommodation("Hôtel Amber El Fell", "Hammamet", "Hotel", 10, 210.60, true, "Luxury Hotel", R.drawable.h1));
+        accommodations.add(new Accommodation("Guest House Hammamet", "Hammamet", "Guest House", 50, 80.0, true, "Cozy Place", R.drawable.h5));
         accommodations.add(new Accommodation("Traditional Stay Hammamet", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.sample_image3));
-        accommodations.add(new Accommodation("Yadis Hammamet", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.sample_image4));
+        accommodations.add(new Accommodation("Yadis Hammamet", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.sample_image2));
+
 
         // Insert accommodations into the database only if they do not already exist
         Executors.newSingleThreadExecutor().execute(() -> {

@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,34 @@ public class ReservationConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_confirmation);
         setupBackIcon();
+
+
+
+
+
+        // In your Activity or Fragment
+        RadioGroup paymentRadioGroup = findViewById(R.id.payment_radio_group);
+        LinearLayout paymentMethodsLayout = findViewById(R.id.payment_methods_layout);
+
+// Set up the listener for the payment RadioGroup
+        paymentRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.payment_online) {
+                    // Show payment options for "Paiement en ligne"
+                    paymentMethodsLayout.setVisibility(View.VISIBLE);
+                } else {
+                    // Hide payment options if another payment method is selected
+                    paymentMethodsLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+
+
+
+
 
         Button confirmButton = findViewById(R.id.confirm_button_id);
         confirmButton.setOnClickListener(view -> {
@@ -189,5 +219,10 @@ public class ReservationConfirmationActivity extends AppCompatActivity {
                 executor.shutdown();
             }
         });
+
+
+
+
+
     }
 }

@@ -1,4 +1,5 @@
-package com.example.user_module.Adapter;// RestaurantAdapter.java
+package com.example.user_module.Adapter;
+
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user_module.R;
 import com.example.user_module.entity.Restaurant;
+import com.bumptech.glide.Glide;
 
 public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter.RestaurantHolder> {
 
@@ -55,7 +57,14 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         holder.textViewType.setText(currentRestaurant.getType());
         holder.textViewCapacite.setText(currentRestaurant.getCapacite());
 
-        // Set up the options button to show a popup menu
+        // Load the image using Glide if imageUri is not null
+        if (currentRestaurant.getImageUri() != null && !currentRestaurant.getImageUri().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(currentRestaurant.getImageUri())
+                    .into(holder.imageViewRestaurant);  // Load image into ImageView
+        }
+
+        // Handle the options button click to show the PopupMenu
         holder.imageViewOptions.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(holder.itemView.getContext(), holder.imageViewOptions);
             MenuInflater inflater = popupMenu.getMenuInflater();
@@ -81,13 +90,13 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         return false;
     }
 
-
     class RestaurantHolder extends RecyclerView.ViewHolder {
         private final TextView textViewName;
         private final TextView textViewLocation;
         private final TextView textViewType;
         private final TextView textViewCapacite;
         private final ImageView imageViewOptions;
+        private final ImageView imageViewRestaurant; // New ImageView for restaurant image
 
         public RestaurantHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +105,7 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             textViewType = itemView.findViewById(R.id.text_view_type);
             textViewCapacite = itemView.findViewById(R.id.text_view_capacite);
             imageViewOptions = itemView.findViewById(R.id.image_view_options);
+            imageViewRestaurant = itemView.findViewById(R.id.image_view_restaurant); // Initialize ImageView
         }
     }
 

@@ -12,11 +12,13 @@ import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user_module.Adapter.DestinationAdapter;
 import com.example.user_module.Adapter.RestaurantAdapter;
+import com.example.user_module.AppDatabase;
 import com.example.user_module.R;
 import com.example.user_module.entity.Destination;
 import com.example.user_module.entity.Restaurant;
@@ -24,7 +26,7 @@ import com.example.user_module.entity.Restaurant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DestinationAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements DestinationAdapter.OnItemClickListener,RestaurantAdapter.OnItemClickListener {
 
     private List<Destination> destinations;
     private List<Destination> filteredDestinations;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
     private List<Restaurant> restaurants;
     private List<Restaurant> filteredRestaurants;
     private RestaurantAdapter restaurantAdapter;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +43,13 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
         EdgeToEdge.enable(this); // Ensure this is configured if necessary
         setContentView(R.layout.activity_main);
 
-
         ImageView addIcon = findViewById(R.id.add_icon); // Find the add icon
         addIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AddEditRestaurantActivity.class); // Create the intent
+            Intent intent = new Intent(MainActivity.this, ListRestaurantsActivity.class); // Create the intent
             startActivity(intent); // Start the AddEditRestaurantActivity
         });
 
-
-
-
-
-// Initialize Search Box for restaurants
+        // Initialize Search Box for restaurants
         EditText searchBoxRestaurant = findViewById(R.id.search_box_Restaurant);
 
         // Initialize RecyclerView and Search Box for destinations
@@ -82,10 +80,8 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
             @Override
             public void afterTextChanged(Editable s) {}
         });
-// Inside onCreate()
 
-
-// Add a TextWatcher to filter restaurants based on search query
+        // Add a TextWatcher to filter restaurants based on search query
         searchBoxRestaurant.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -128,11 +124,9 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
         populateRestaurants();
         filteredRestaurants.addAll(restaurants);
 
-        // Set up the adapter for restaurants
-
-
-      // restaurantAdapter = new RestaurantAdapter(filteredRestaurants, this);
-
+        // Set up the adapter for restaurants with OnItemClickListener
+        restaurantAdapter = new RestaurantAdapter();
+        restaurantAdapter.setOnItemClickListener(this); // Pass the listener
         recyclerViewRestaurant.setAdapter(restaurantAdapter);
     }
 
@@ -146,12 +140,15 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
     }
 
     private void populateRestaurants() {
-      //  restaurants.add(new Restaurant(1,"Dar El Jeld", "Hammamet", "Hotel", "Hotel"));
-      //  restaurants.add(new Restaurant("El Ali", "Hammamet", "Guest House", 50, 80.0, true, "Cozy Place", R.drawable.ic_r2));
-      //  restaurants.add(new Restaurant(" El Walima", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.ic_r3));
-       // restaurants.add(new Restaurant("Saray Turkish Cuisine", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.ic_r4));
+        // Observe the LiveData to get the list of restaurants asynchronously
+        LiveData<List<Restaurant>> allRestaurants = AppDatabase.getInstance(this).restaurantDao().getAllRestaurants();
+        allRestaurants.observe(this, restaurantList -> {
+            // When the LiveData is updated, clear and update the filtered list
+            filteredRestaurants.clear();
+            filteredRestaurants.addAll(restaurantList); // Populate the filtered list
+            restaurantAdapter.submitList(filteredRestaurants); // Update the adapter with the filtered list
+        });
     }
-
 
 
 
@@ -170,19 +167,18 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
     }
 
     private void filterRestaurants(String query) {
-        filteredRestaurants.clear();
+        List<Restaurant> filteredList = new ArrayList<>();
         if (query.isEmpty()) {
-            filteredRestaurants.addAll(restaurants);
+            filteredList.addAll(filteredRestaurants); // Show all restaurants if query is empty
         } else {
-            for (Restaurant restaurant : restaurants) {
+            for (Restaurant restaurant : filteredRestaurants) {
                 if (restaurant.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filteredRestaurants.add(restaurant);
+                    filteredList.add(restaurant);
                 }
             }
         }
-        restaurantAdapter.notifyDataSetChanged();
+        restaurantAdapter.submitList(filteredList); // Submit the filtered list to the adapter
     }
-
 
     @Override
     public void onItemClick(Destination destination) {
@@ -191,21 +187,30 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
         intent.putExtra("name", destination.getName());
         startActivity(intent);
     }
-   /* @Override
+
+    @Override
+    public void onViewClick(Restaurant restaurant) {
+        // Handle view action for restaurant
+    }
+
+    @Override
+    public void onEditClick(Restaurant restaurant) {
+        // Handle edit action for restaurant
+    }
+
+    @Override
+    public void onDeleteClick(Restaurant restaurant) {
+        // Handle delete action for restaurant
+    }
+  /*  @Override
     public void onItemClick(Restaurant restaurant) {
         Log.d("MainActivity", "Restaurant clicked: " + restaurant.getName());
         Intent intent = new Intent(MainActivity.this, RestaurantDetailActivity.class);
         intent.putExtra("name", restaurant.getName());
         intent.putExtra("location", restaurant.getLocation());
         intent.putExtra("type", restaurant.getType());
-        //intent.putExtra("capacity", restaurant.getCapacity());
-      //  intent.putExtra("description", restaurant.getDescription());
-      //  intent.putExtra("imageResId", restaurant.getImageResId());
+        intent.putExtra("capacity", restaurant.getCapacite());
+        intent.putExtra("imageResId", restaurant.getImageUri());
         startActivity(intent);
     }*/
-
-
-
 }
-
-

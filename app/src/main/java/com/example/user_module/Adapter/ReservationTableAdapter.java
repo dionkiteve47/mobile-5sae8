@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user_module.R;
 import com.example.user_module.AppDatabase;
+import com.example.user_module.activity.ReservationConfirmationDetailActivity;
 import com.example.user_module.activity.UpdateReservationActivity;
 import com.example.user_module.entity.Reservation;
 
@@ -44,7 +45,7 @@ public class ReservationTableAdapter extends RecyclerView.Adapter<ReservationTab
         //holder.reservationStartDate.setText(reservation.getStartDate());
         //holder.reservationEndDate.setText(reservation.getEndDate());
         //holder.reservationUserId.setText(String.valueOf(reservation.getUserId()));
-        holder.reservationFirstName.setText(reservation.getFirstName()); // Bind first name
+        holder.reservationFirstName.setText(reservation.getLastName()); // Bind first name
 
         // Update button click listener
         holder.updateButton.setOnClickListener(v -> {
@@ -62,8 +63,13 @@ public class ReservationTableAdapter extends RecyclerView.Adapter<ReservationTab
                 ((Activity) context).runOnUiThread(() -> notifyItemRemoved(position));
             }).start();
         });
-    }
 
+    // View Details button click listener
+    holder.viewDetailsButton.setOnClickListener(v -> {
+        Intent intent = new Intent(context, ReservationConfirmationDetailActivity.class);
+        intent.putExtra("reservationId", reservation.getId());
+        context.startActivity(intent);
+    });}
     @Override
     public int getItemCount() {
         return reservationList.size();
@@ -71,8 +77,7 @@ public class ReservationTableAdapter extends RecyclerView.Adapter<ReservationTab
 
     static class ReservationViewHolder extends RecyclerView.ViewHolder {
         TextView reservationId, reservationStartDate, reservationEndDate, reservationUserId, reservationFirstName; // Add first name TextView
-        ImageButton updateButton, deleteButton;
-
+        ImageButton updateButton, deleteButton,viewDetailsButton;
         public ReservationViewHolder(@NonNull View itemView) {
             super(itemView);
             reservationId = itemView.findViewById(R.id.reservationId);
@@ -82,6 +87,7 @@ public class ReservationTableAdapter extends RecyclerView.Adapter<ReservationTab
            // reservationUserId = itemView.findViewById(R.id.reservationUserId);
             updateButton = itemView.findViewById(R.id.updateButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            viewDetailsButton = itemView.findViewById(R.id.viewDetailsButton);
         }
     }
 }

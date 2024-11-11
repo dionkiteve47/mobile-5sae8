@@ -40,12 +40,12 @@ public class Accommodation {
     @ColumnInfo(name = "booked_dates")
     private String bookedDates;  // Store the booked dates as a JSON string
 
-
+    private String imageUri;
     // Default constructor
     public Accommodation() {}
 
     // Parameterized constructor without imageResId
-    public Accommodation(String name, String location, String type, int capacity, double pricePerNight, boolean isAvailable, String title) {
+    public Accommodation(String name, String location, String type, int capacity, double pricePerNight, boolean isAvailable, String title,String imageUri) {
 
         this.name = name;
         this.location = location;
@@ -54,6 +54,7 @@ public class Accommodation {
         this.pricePerNight = pricePerNight;
         this.isAvailable = isAvailable;
         this.title = title;
+        this.imageUri = imageUri;
     }
 
     // Parameterized constructor with imageResId
@@ -75,6 +76,15 @@ public class Accommodation {
 
     public void setId(int id) {
         this.id = id;
+    }
+    // Getter for imageUri
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    // Setter for imageUri
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
     public String getName() {
