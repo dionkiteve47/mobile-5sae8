@@ -16,6 +16,9 @@
         android:theme="@style/Theme.User_module"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.AdminDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AccommodationViewModel"
             android:exported="false" />
         <activity
@@ -45,9 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activity.ViewRestaurantActivity"
             android:exported="false" />
@@ -80,7 +81,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

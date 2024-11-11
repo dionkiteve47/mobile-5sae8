@@ -1,11 +1,14 @@
 package com.example.user_module.Dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.user_module.entity.User;
+
+import java.util.List;
 
 @Dao
 public interface UserDao {
@@ -34,5 +37,12 @@ public interface UserDao {
     @Query("SELECT * FROM user_table WHERE resetToken = :resetToken LIMIT 1")
     User getUserByResetToken(String resetToken); // Retrieve user by reset token
 
+    @Query("SELECT * FROM user_table")
+    List<User> getAllUsers();
+
+
+
+    @Delete
+    void delete(User user);
 
 }

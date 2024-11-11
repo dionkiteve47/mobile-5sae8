@@ -5,9 +5,15 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import com.example.user_module.AppDatabase;
+import com.example.user_module.Dao.UserDao;
 import com.example.user_module.R;
+import com.example.user_module.entity.User;
 import com.example.user_module.util.SessionManager; // Import SessionManager
 
 public class DashboardActivity extends AppCompatActivity {

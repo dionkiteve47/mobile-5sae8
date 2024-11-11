@@ -18,7 +18,7 @@ import com.example.user_module.entity.Restaurant;
 import com.example.user_module.entity.Site;
 import com.example.user_module.entity.User;
 
-@Database(entities = {User.class,Site.class, Restaurant.class, Reservation.class, Accommodation.class }, version = 36) // Increment version if needed
+@Database(entities = {User.class,Site.class, Restaurant.class, Reservation.class, Accommodation.class }, version = 1) // Increment version if needed
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -34,7 +34,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "MobileApp")
+                            AppDatabase.class, "user_database")
                     .fallbackToDestructiveMigration()
                     .build();
         }

@@ -37,6 +37,6 @@
     <color name="textPrimaryColor">#FFFFFF</color> <!-- White for primary text -->
     <color name="recyclerViewBackgroundColor">#F0F0F0</color>
     <color name="primaryColorLight">#BB86FC</color>
-    <color name="buttonColor">#03DAC5</color>
+
 
 </resources>

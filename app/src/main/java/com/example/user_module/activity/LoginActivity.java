@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        // Initialize Room database
         AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "user_database").build();
 
         new Thread(() -> {
@@ -93,12 +94,19 @@ public class LoginActivity extends AppCompatActivity {
             User user = userDao.getUserByEmail(email);
 
             if (user != null && BCrypt.checkpw(password, user.password)) {
-                // Create a login session
-                sessionManager.createLoginSession(String.valueOf(user.id));
+                // Save session and set user ID and role in session manager
+                sessionManager.createLoginSession(String.valueOf(user.id), user.role);
 
                 runOnUiThread(() -> {
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+
+                    // Redirect based on role
+                    Intent intent;
+                    if ("ADMIN".equals(user.role)) {
+                        intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                    } else {
+                        intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    }
                     startActivity(intent);
                     finish();
                 });
@@ -107,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }).start();
     }
+
 
     private void initiatePasswordReset() {
         final String email = emailEditText.getText().toString().trim();
