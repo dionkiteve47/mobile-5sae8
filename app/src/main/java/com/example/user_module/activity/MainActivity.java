@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements DestinationAdapte
     }
 
     private void populateRestaurants() {
-        restaurants.add(new Restaurant(1,"Dar El Jeld", "Hammamet", "Hotel", "Hotel"));
+      //  restaurants.add(new Restaurant(1,"Dar El Jeld", "Hammamet", "Hotel", "Hotel"));
       //  restaurants.add(new Restaurant("El Ali", "Hammamet", "Guest House", 50, 80.0, true, "Cozy Place", R.drawable.ic_r2));
       //  restaurants.add(new Restaurant(" El Walima", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.ic_r3));
        // restaurants.add(new Restaurant("Saray Turkish Cuisine", "Hammamet", "Traditional", 30, 60.0, true, "Authentic Experience", R.drawable.ic_r4));
