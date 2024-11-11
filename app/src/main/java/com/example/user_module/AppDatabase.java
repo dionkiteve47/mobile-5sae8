@@ -18,7 +18,7 @@ import com.example.user_module.entity.Restaurant;
 import com.example.user_module.entity.Site;
 import com.example.user_module.entity.User;
 
-@Database(entities = {User.class,Site.class, Restaurant.class, Reservation.class, Accommodation.class }, version = 19) // Increment version if needed
+@Database(entities = {User.class,Site.class, Restaurant.class, Reservation.class, Accommodation.class }, version = 21) // Increment version if needed
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
 

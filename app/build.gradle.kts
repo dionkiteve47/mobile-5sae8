@@ -51,6 +51,7 @@ android {
     // Enable BuildConfig generation
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -70,6 +71,8 @@ dependencies {
     implementation(libs.room.common)
     implementation(libs.room.runtime)
     implementation("com.google.android.gms:play-services-safetynet:17.0.0")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
