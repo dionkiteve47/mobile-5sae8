@@ -6,6 +6,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +37,11 @@ public class UpdateReservationActivity extends AppCompatActivity {
     private RadioButton mmCheckBox; // for Mme.
     private RadioButton mlleCheckBox; // for Mlle.
 
+
+    private TextView roomDetailsTextView; // To display room details
+    private TextView paymentInfoTextView; // To display payment info
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,11 @@ public class UpdateReservationActivity extends AppCompatActivity {
         mmCheckBox = findViewById(R.id.radio_mme); // Assuming you have this in your layout
         mlleCheckBox = findViewById(R.id.radio_mlle);
 
+
+        // Initialize the TextViews for room details and payment info
+        roomDetailsTextView = findViewById(R.id.room_details);
+        paymentInfoTextView = findViewById(R.id.payment_info);
+
         int reservationId = getIntent().getIntExtra("reservationId", -1);
 
         // Load reservation details
@@ -91,6 +102,11 @@ public class UpdateReservationActivity extends AppCompatActivity {
                         mrCheckBox.setChecked(reservation.isMr()); // Set Mr. checkbox status
                         mmCheckBox.setChecked(reservation.isMm()); // Set Mme. checkbox status
                         mlleCheckBox.setChecked(reservation.isMlle());
+
+
+                        roomDetailsTextView.setText(reservation.getRoomDescription());
+                        paymentInfoTextView.setText( reservation.getPrice());
+
                     }
                 });
             }).start();

@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
+//hotel
 @Entity(tableName = "accommodations")
 public class Accommodation {
 
@@ -16,7 +19,7 @@ public class Accommodation {
     @ColumnInfo(name = "location")
     private String location;
 
-    @ColumnInfo(name = "type") // e.g., hotel, guest house, traditional
+    @ColumnInfo(name = "type")
     private String type;
 
     @ColumnInfo(name = "capacity")
@@ -34,11 +37,16 @@ public class Accommodation {
     @ColumnInfo(name = "image_res_id")
     private int imageResId;
 
+    @ColumnInfo(name = "booked_dates")
+    private String bookedDates;  // Store the booked dates as a JSON string
+
+    private String imageUri;
     // Default constructor
     public Accommodation() {}
 
     // Parameterized constructor without imageResId
-    public Accommodation(String name, String location, String type, int capacity, double pricePerNight, boolean isAvailable, String title) {
+    public Accommodation(String name, String location, String type, int capacity, double pricePerNight, boolean isAvailable, String title,String imageUri) {
+
         this.name = name;
         this.location = location;
         this.type = type;
@@ -46,10 +54,7 @@ public class Accommodation {
         this.pricePerNight = pricePerNight;
         this.isAvailable = isAvailable;
         this.title = title;
-    }
-    public String getDescription() {
-        return name + " located in " + location + ", " + type + " with a capacity of " + capacity +
-                ". Price per night: " + pricePerNight + " DT. Available: " + (isAvailable ? "Yes" : "No");
+        this.imageUri = imageUri;
     }
 
     // Parameterized constructor with imageResId
@@ -71,6 +76,15 @@ public class Accommodation {
 
     public void setId(int id) {
         this.id = id;
+    }
+    // Getter for imageUri
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    // Setter for imageUri
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
     public String getName() {
@@ -135,6 +149,19 @@ public class Accommodation {
 
     public void setImageResId(int imageResId) {
         this.imageResId = imageResId;
+    }
+
+    public String getBookedDates() {
+        return bookedDates;
+    }
+
+    public void setBookedDates(String bookedDates) {
+        this.bookedDates = bookedDates;
+    }
+
+    public String getDescription() {
+        return name + " located in " + location + ", " + type + " with a capacity of " + capacity +
+                ". Price per night: " + pricePerNight + " DT. Available: " + (isAvailable ? "Yes" : "No");
     }
 
     // toString method

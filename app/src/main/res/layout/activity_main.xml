@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context="activity.MainActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="154dp">
 
@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Booking.com"
+        app:title="TuniTrip.tn"
         app:titleTextColor="@android:color/white" />
 
     <!-- Navigation bar with icons -->
@@ -35,6 +35,7 @@
 
         <!-- Accommodation icon -->
         <LinearLayout
+            android:id="@+id/hotel_section"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,18 +45,19 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_accommodation" />
+                android:src="@drawable/baseline_hotel_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hébergements"
+                android:text="Hotel"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Flights icon -->
         <LinearLayout
+            android:id="@+id/restaurant_section"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,12 +67,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_flights" />
+                android:src="@drawable/baseline_restaurant_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vols"
+                android:text="Restaurant"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -86,12 +88,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_car" />
+                android:src="@drawable/baseline_map_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Voitures"
+                android:text="Sites"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -107,12 +109,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_taxi" />
+                android:src="@drawable/baseline_activity" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taxis"
+                android:text="Activities"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -131,45 +133,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/navigation_bar">
 
-        <TextView
+        <EditText
+            android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_box"
-            android:drawableStart="@drawable/ic_location"
+            android:drawableStart="@drawable/baseline_location_on_24"
             android:drawablePadding="8dp"
             android:padding="8dp"
-            android:text="Hammamet"
-            android:textColor="@color/black" />
+            android:hint="Search location"
+            android:textColor="@color/black"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_search_box"
-            android:drawableStart="@drawable/ic_calendar"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:text="Mer. 12 juin - Mar. 18 juin"
-            android:textColor="@color/black" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_search_box"
-            android:drawableStart="@drawable/ic_person"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:text="1 hébergement - 2 adultes"
-            android:textColor="@color/black" />
 
-        <Button
+
+
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/blue"
-            android:text="Rechercher"
-            android:textColor="@android:color/white" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -185,10 +170,78 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Best offers section -->
 
-    <!-- Image sections -->
 
+
+
+
+
+
+    <!-- restaurant -->
+
+    <LinearLayout
+        android:id="@+id/restaurant_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigation_bar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Search Box -->
+            <EditText
+                android:id="@+id/search_box_Restaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_search_box"
+                android:drawableStart="@drawable/baseline_location_on_24"
+                android:drawablePadding="8dp"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
+            <!-- Add Icon on the top right -->
+            <ImageView
+                android:id="@+id/add_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/baseline_add_24"
+                android:contentDescription="Add"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <!-- Recommendations List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 
@@ -204,27 +257,6 @@
 
 
     <!-- Add the RecyclerView here -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

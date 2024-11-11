@@ -1,5 +1,6 @@
 package com.example.user_module.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -48,8 +49,11 @@ public class ReservationListActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Close this activity and return to the previous one
+                Intent intent = new Intent(ReservationListActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Close this activity
             }
         });
     }
+
 }

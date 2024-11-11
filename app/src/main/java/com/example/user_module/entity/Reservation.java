@@ -148,7 +148,9 @@ public class Reservation {
     public boolean isTermsAccepted() {
         return termsAccepted;
     }
-
+    // New fields
+    private String price;
+    private String roomDescription;
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -229,7 +231,22 @@ public class Reservation {
     public void setTermsAccepted(boolean termsAccepted) {
         this.termsAccepted = termsAccepted;
     }
+    // Getters and setters for new fields
+    public String getPrice() {
+        return price;
+    }
 
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
+    }
     // toString method
     @Override
     public String toString() {
@@ -254,16 +271,18 @@ public class Reservation {
                 ", kingBed=" + kingBed +
                 ", paymentOnline=" + paymentOnline +
                 ", termsAccepted=" + termsAccepted +
+                ", price=" + price +
+                ", roomDescription='" + roomDescription + '\'' +
                 '}';
     }
 
-    // Constructor with firstName, lastName, email, and phone
+
     // Constructor with all fields
     public Reservation(String firstName, String lastName, String email, String phone,
                        String occupantFirstName, String occupantLastName, String message,
                        boolean lateArrival, boolean sideBySide, boolean kingBed,
-                       boolean paymentOnline, boolean termsAccepted,
-                       boolean payment_agency, boolean mr, boolean mm, boolean mlle) {
+                       boolean paymentOnline, boolean termsAccepted, boolean payment_agency,
+                       boolean mr, boolean mm, boolean mlle, String price, String roomDescription) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -277,12 +296,14 @@ public class Reservation {
         this.kingBed = kingBed;
         this.paymentOnline = paymentOnline;
         this.termsAccepted = termsAccepted;
-
-        // Initialize the new fields
         this.payment_agency = payment_agency;
         this.mr = mr;
         this.mm = mm;
         this.mlle = mlle;
+
+        // Initialize the new fields
+        this.price = price;
+        this.roomDescription = roomDescription;
     }
 
 }

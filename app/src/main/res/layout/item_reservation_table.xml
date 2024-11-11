@@ -39,6 +39,16 @@
             android:textColor="@color/black"/>
 
         <ImageButton
+            android:id="@+id/viewDetailsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:contentDescription="@string/update_button_description"
+            android:src="@drawable/baseline_info_24" />
+
+
+        <ImageButton
             android:id="@+id/updateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

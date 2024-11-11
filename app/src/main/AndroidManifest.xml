@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.User_module"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.AccommodationViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddAccommodationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RestaurantDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.User_module" />
         <activity
             android:name=".activity.UpdateReservationActivity"
             android:exported="false" />
@@ -31,7 +43,6 @@
         <activity
             android:name=".activity.DestinationDetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
@@ -42,13 +53,10 @@
             android:exported="false" />
         <activity
             android:name=".activity.ListRestaurantsActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.AddEditRestaurantActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.ViewSiteActivity"
             android:exported="false" />
@@ -57,8 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.SiteListActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="false" />
@@ -82,9 +89,7 @@
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

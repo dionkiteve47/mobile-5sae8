@@ -47,6 +47,7 @@ public class RecommendationsAdapter extends RecyclerView.Adapter<Recommendations
         // Set click listener for "Voir l'offre" button
         holder.viewOfferButton.setOnClickListener(v -> {
             Intent intent = new Intent(context, AccommodationDetailActivity.class);
+            intent.putExtra("accommodationId", accommodation.getId());
             intent.putExtra("name", accommodation.getName());
             intent.putExtra("location", accommodation.getLocation()); // Pass the location
             intent.putExtra("type", accommodation.getType()); // Pass the type
@@ -55,6 +56,7 @@ public class RecommendationsAdapter extends RecyclerView.Adapter<Recommendations
             intent.putExtra("title", accommodation.getTitle()); // Pass the title
             intent.putExtra("pricePerNight", accommodation.getPricePerNight());
             intent.putExtra("imageResId", accommodation.getImageResId());
+
             context.startActivity(intent);
         });
     }
