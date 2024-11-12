@@ -1,11 +1,15 @@
 package com.example.user_module.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.user_module.AppDatabase;
 import com.example.user_module.R;
 import com.example.user_module.entity.Site;
@@ -15,26 +19,49 @@ import java.util.concurrent.Executors;
 
 public class AddEditSiteActivity extends AppCompatActivity {
 
+    private static final int PICK_IMAGE_REQUEST = 1;
+
     private TextInputEditText editTextTitle, editTextDescription;
-    private Button buttonSaveSite;
-    private int siteId = -1; // Default to -1 to indicate a new site
+    private Button buttonSaveSite, buttonSelectSiteImage;
+    private ImageView imageViewSitePreview;
+    private Uri selectedImageUri;
+    private int siteId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_site);
-
+        setupBackIcon();
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDescription = findViewById(R.id.editTextDescription);
-        buttonSaveSite = findViewById(R.id.buttonSaveForum); // ID matches the layout
+        imageViewSitePreview = findViewById(R.id.imageViewPreview);
+        buttonSaveSite = findViewById(R.id.buttonSaveForum);
+        buttonSelectSiteImage = findViewById(R.id.buttonSelectImage);
 
-        // Check if we are editing an existing site
+        // Check if editing an existing site
         siteId = getIntent().getIntExtra("siteId", -1);
         if (siteId != -1) {
             loadSiteData();
         }
 
+        buttonSelectSiteImage.setOnClickListener(v -> openImageSelector());
         buttonSaveSite.setOnClickListener(v -> saveSite());
+    }
+
+    private void openImageSelector() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            selectedImageUri = data.getData();
+            Glide.with(this).load(selectedImageUri).into(imageViewSitePreview); // Display selected image
+        }
     }
 
     private void loadSiteData() {
@@ -43,6 +70,9 @@ public class AddEditSiteActivity extends AppCompatActivity {
             if (site != null) {
                 editTextTitle.setText(site.getName());
                 editTextDescription.setText(site.getDescription());
+                if (site.getImageUri() != null && !site.getImageUri().isEmpty()) {
+                    Glide.with(this).load(site.getImageUri()).into(imageViewSitePreview);
+                }
             }
         });
     }
@@ -56,9 +86,12 @@ public class AddEditSiteActivity extends AppCompatActivity {
             return;
         }
 
+        String imageUri = selectedImageUri != null ? selectedImageUri.toString() : null;
+
         Site site = new Site();
         site.setName(title);
         site.setDescription(description);
+        site.setImageUri(imageUri);
 
         if (siteId != -1) {
             site.setId(siteId); // Set ID if editing
@@ -78,5 +111,9 @@ public class AddEditSiteActivity extends AppCompatActivity {
                 finish(); // Close activity
             });
         });
+    }
+    private void setupBackIcon() {
+        ImageView backIcon = findViewById(R.id.back_icon);
+        backIcon.setOnClickListener(v -> finish()); // Close this activity and return to the previous one
     }
 }

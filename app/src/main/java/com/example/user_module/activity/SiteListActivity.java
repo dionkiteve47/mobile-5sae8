@@ -3,6 +3,8 @@ package com.example.user_module.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +23,7 @@ public class SiteListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_site);
-
+        setupBackIcon();
         recyclerViewSites = findViewById(R.id.recyclerViewSites);
         buttonAddSite = findViewById(R.id.buttonAddSite);
 
@@ -46,5 +48,9 @@ public class SiteListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadSites(); // Refresh the list when returning to this activity
+    }
+    private void setupBackIcon() {
+        ImageView backIcon = findViewById(R.id.back_icon);
+        backIcon.setOnClickListener(v -> finish()); // Close this activity and return to the previous one
     }
 }
