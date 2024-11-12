@@ -30,7 +30,7 @@ public class AddEditRestaurantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_restaurant);
-
+        setupBackIcon();
         // Initialize views
         editTextName = findViewById(R.id.edit_text_name);
         editTextLocation = findViewById(R.id.edit_text_location);
@@ -145,5 +145,8 @@ public class AddEditRestaurantActivity extends AppCompatActivity {
         }).start();
     }
 
-
+    private void setupBackIcon() {
+        ImageView backIcon = findViewById(R.id.back_icon);
+        backIcon.setOnClickListener(v -> finish()); // Close this activity and return to the previous one
+    }
 }

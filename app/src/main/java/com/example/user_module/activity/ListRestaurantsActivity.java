@@ -3,6 +3,7 @@ package com.example.user_module.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class ListRestaurantsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_restaurants);
-
+        setupBackIcon();
         // Set up RecyclerView and adapter
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,5 +79,11 @@ public class ListRestaurantsActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             Toast.makeText(ListRestaurantsActivity.this, "Restaurant deleted", Toast.LENGTH_SHORT).show();
         }
+
+
+    }
+    private void setupBackIcon() {
+        ImageView backIcon = findViewById(R.id.back_icon);
+        backIcon.setOnClickListener(v -> finish()); // Close this activity and return to the previous one
     }
 }

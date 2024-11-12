@@ -88,12 +88,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_car" />
+                android:src="@drawable/baseline_map_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Voitures"
+                android:text="Sites"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -109,12 +109,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_taxi" />
+                android:src="@drawable/baseline_activity" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taxis"
+                android:text="Activities"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
         </LinearLayout>

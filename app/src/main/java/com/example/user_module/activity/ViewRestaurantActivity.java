@@ -23,7 +23,7 @@ public class ViewRestaurantActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_restaurant);
-
+        setupBackIcon();
         // Initialize TextViews and ImageView
         textViewName = findViewById(R.id.text_view_name);
         textViewLocation = findViewById(R.id.text_view_location);
@@ -66,5 +66,9 @@ public class ViewRestaurantActivity extends AppCompatActivity {
                 }
             });
         }).start();
+    }
+    private void setupBackIcon() {
+        ImageView backIcon = findViewById(R.id.back_icon);
+        backIcon.setOnClickListener(v -> finish()); // Close this activity and return to the previous one
     }
 }
