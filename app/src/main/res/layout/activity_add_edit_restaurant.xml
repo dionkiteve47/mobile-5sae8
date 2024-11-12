@@ -116,8 +116,7 @@
         android:scaleType="centerCrop"
         android:contentDescription="Restaurant Image Preview"
         android:background="?attr/colorSurfaceVariant"
-        android:clipToOutline="true"
-        app:cornerRadius="8dp" />
+        android:clipToOutline="true" />
 
     <!-- Rounded Button for Saving Restaurant -->
     <com.google.android.material.button.MaterialButton

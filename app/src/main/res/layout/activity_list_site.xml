@@ -5,6 +5,8 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:background="@color/customBackgroundColor">
+
+    <!-- Back Icon -->
     <ImageView
         android:id="@+id/back_icon"
         android:layout_width="32dp"
@@ -13,8 +15,12 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="Back"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:layout_gravity="start"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground" />
 
+    <!-- Add Site Button with rounded corners and shadow -->
     <Button
         android:id="@+id/buttonAddSite"
         android:layout_width="wrap_content"
@@ -24,12 +30,12 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="?attr/colorPrimary"
         android:textColor="?android:attr/textColorPrimaryInverse"
-        android:paddingHorizontal="20dp"
-        android:elevation="4dp"
-        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:elevation="6dp"
+    android:paddingHorizontal="20dp"
+    android:layout_marginTop="8dp" />  <!-- Custom button states for interaction -->
 
-        android:textStyle="bold" />
-
+    <!-- RecyclerView for sites -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSites"
         android:layout_width="match_parent"
@@ -38,8 +44,10 @@
         android:background="?attr/colorSurface"
         android:elevation="4dp"
         android:clipToPadding="false"
-        android:padding="12dp"
+        android:padding="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:scrollbars="vertical"
+        android:clipToOutline="true" />
 
 </LinearLayout>
